@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
-// ─── Constants ────────────────────────────────────────────────────────────────
-
+import "../styles/Services.css";
 const SERVICES = [
     {
         id: "seo",
@@ -148,9 +146,6 @@ const PROCESS_STEPS = [
         body: "Monthly performance reviews feed back into the strategy. What works gets scaled. What doesn't gets cut. Nothing stays static.",
     },
 ];
-
-// ─── SVG Visuals ──────────────────────────────────────────────────────────────
-
 function SEOVisual() {
     const bars = [22, 32, 28, 44, 38, 56, 50, 68, 62, 84];
     return (
@@ -380,9 +375,6 @@ function ContentVisual() {
         </svg>
     );
 }
-
-// ─── Sub-components ───────────────────────────────────────────────────────────
-
 function Eyebrow({ children }) {
     return (
         <p className="eyebrow">
@@ -422,29 +414,23 @@ function ServiceCard({ id, number, title, tagline, body, deliverables, metrics, 
             style={{ "--accent": accent, animationDelay: `${index * 0.06}s` }}
             aria-labelledby={`svc-title-${id}`}
         >
-            {/* Visual panel */}
             <div className="svc-visual" aria-hidden="true">
                 {visual}
                 <div className="visual-scrim" />
                 <span className="svc-number-bg" aria-hidden="true">{number}</span>
             </div>
-
-            {/* Copy panel */}
             <div className="svc-copy">
                 <div className="svc-copy-inner">
                     <p className="svc-number" aria-hidden="true">{number}</p>
                     <h3 className="svc-title" id={`svc-title-${id}`}>{title}</h3>
                     <p className="svc-tagline">{tagline}</p>
                     <p className="svc-body">{body}</p>
-
                     <ul className="deliverables-list" aria-label={`${title} deliverables`}>
                         {deliverables.map((d) => <DeliverableItem key={d} text={d} />)}
                     </ul>
-
                     <div className="svc-metrics" role="list" aria-label={`${title} results`}>
                         {metrics.map((m) => <ServiceMetric key={m.label} {...m} />)}
                     </div>
-
                     <Link to="/contact" className="svc-cta" aria-label={`Start a ${title} project`}>
                         Get started
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -454,7 +440,6 @@ function ServiceCard({ id, number, title, tagline, body, deliverables, metrics, 
                     </Link>
                 </div>
             </div>
-
             <span className="card-accent-line" aria-hidden="true" />
         </article>
     );
@@ -476,712 +461,9 @@ function ProcessStep({ number, title, body, index }) {
     );
 }
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
-
-const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap');
-
-  :root {
-    --crimson:    #9C0D1C;
-    --scarlet:    #DB2740;
-    --blush:      #E35E7D;
-    --mauve:      #D7869E;
-    --slate-teal: #A3C3C8;
-    --ink:        #0e0d0d;
-    --ink-2:      #131212;
-    --ink-3:      #191717;
-    --cream:      #faf8f5;
-  }
-
-  /* ── Page ─────────────────────────────────────────────────── */
-  .services-page { background: var(--ink); color: var(--cream); }
-
-  /* ── Shared ───────────────────────────────────────────────── */
-  .inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
-
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--scarlet);
-    margin-bottom: 1.25rem;
-  }
-
-  .eyebrow-dot {
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    background: var(--scarlet);
-    flex-shrink: 0;
-  }
-
-  .section-divider { height: 1px; background: rgba(250,248,245,0.05); }
-
-  /* ────────────────────────────────────────────────────────────
-     HERO
-  ──────────────────────────────────────────────────────────── */
-  .services-hero {
-    position: relative;
-    background: var(--ink);
-    padding: 10rem 0 6rem;
-    overflow: hidden;
-    isolation: isolate;
-  }
-
-  .services-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 65% 55% at 50% -5%, rgba(219,39,64,0.1) 0%, transparent 65%),
-      radial-gradient(ellipse 35% 40% at 95% 80%, rgba(163,195,200,0.06) 0%, transparent 60%);
-    pointer-events: none;
-  }
-
-  .services-hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0.025;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 128px;
-    pointer-events: none;
-  }
-
-  .hero-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-    animation: revealUp 0.7s cubic-bezier(0.16,1,0.3,1) both;
-  }
-
-  @media (max-width: 860px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
-  }
-
-  .hero-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.6rem, 5vw, 4rem);
-    font-weight: 900;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    color: var(--cream);
-    margin: 0 0 1.5rem;
-  }
-
-  .hero-headline em {
-    font-style: italic;
-    background: linear-gradient(110deg, var(--scarlet) 0%, var(--blush) 55%, var(--mauve) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hero-body {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.8;
-    color: rgba(250,248,245,0.47);
-    max-width: 46ch;
-    margin: 0 0 2.5rem;
-  }
-
-  /* Service jump-links */
-  .hero-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border: 1px solid rgba(250,248,245,0.07);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  .hero-link-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.25rem;
-    background: var(--ink-2);
-    border-bottom: 1px solid rgba(250,248,245,0.06);
-    text-decoration: none;
-    transition: background 0.2s, padding-left 0.2s;
-    gap: 1rem;
-  }
-
-  .hero-link-item:last-child { border-bottom: none; }
-
-  .hero-link-item:hover {
-    background: var(--ink-3);
-    padding-left: 1.6rem;
-  }
-
-  .hero-link-item:focus-visible {
-    outline: 2px solid var(--blush);
-    outline-offset: -2px;
-  }
-
-  .link-left {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-  }
-
-  .link-num {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.62rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    color: rgba(250,248,245,0.2);
-    min-width: 20px;
-  }
-
-  .link-name {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 400;
-    color: rgba(250,248,245,0.6);
-    transition: color 0.2s;
-  }
-
-  .hero-link-item:hover .link-name { color: var(--cream); }
-
-  .link-arrow {
-    color: rgba(250,248,245,0.2);
-    transition: color 0.2s, transform 0.2s;
-    flex-shrink: 0;
-  }
-
-  .hero-link-item:hover .link-arrow {
-    color: var(--scarlet);
-    transform: translateX(3px);
-  }
-
-  /* ────────────────────────────────────────────────────────────
-     SERVICE CARDS
-  ──────────────────────────────────────────────────────────── */
-  .services-list {
-    background: var(--ink-2);
-    padding: 5rem 0;
-  }
-
-  .services-list-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5px;
-    background: rgba(250,248,245,0.06);
-    border: 1px solid rgba(250,248,245,0.06);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-
-  /* Each card: two-column split */
-  .service-card {
-    position: relative;
-    background: var(--ink);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 340px;
-    overflow: hidden;
-    scroll-margin-top: 100px;
-    transition: background 0.25s;
-    animation: revealUp 0.55s cubic-bezier(0.16,1,0.3,1) both;
-  }
-
-  /* Flip layout for even cards */
-  .service-card--flip { direction: rtl; }
-  .service-card--flip > * { direction: ltr; }
-
-  .service-card:hover { background: #141313; }
-  .service-card:hover .card-accent-line { opacity: 1; }
-  .service-card:hover .svc-visual svg   { transform: scale(1.03); }
-  .service-card:hover .svc-cta          { gap: 0.7rem; color: var(--cream); }
-
-  @media (max-width: 820px) {
-    .service-card,
-    .service-card--flip { grid-template-columns: 1fr; direction: ltr; }
-    .service-card--flip > * { direction: ltr; }
-  }
-
-  /* Accent top line */
-  .card-accent-line {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--accent);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  /* Visual side */
-  .svc-visual {
-    position: relative;
-    overflow: hidden;
-    background: #080808;
-  }
-
-  .svc-visual svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-    min-height: 240px;
-    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
-  }
-
-  .visual-scrim {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, transparent 40%, rgba(20,19,19,0.6) 100%);
-    pointer-events: none;
-  }
-
-  .service-card--flip .visual-scrim {
-    background: linear-gradient(to left, transparent 40%, rgba(20,19,19,0.6) 100%);
-  }
-
-  @media (max-width: 820px) {
-    .visual-scrim,
-    .service-card--flip .visual-scrim {
-      background: linear-gradient(to bottom, transparent 50%, rgba(20,19,19,0.9) 100%);
-    }
-  }
-
-  /* Ghost number watermark */
-  .svc-number-bg {
-    position: absolute;
-    bottom: -0.5rem;
-    right: 1rem;
-    font-family: 'Playfair Display', serif;
-    font-size: 7rem;
-    font-weight: 900;
-    color: rgba(250,248,245,0.025);
-    line-height: 1;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  /* Copy side */
-  .svc-copy {
-    display: flex;
-    align-items: center;
-  }
-
-  .svc-copy-inner {
-    padding: 2.5rem 2.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    max-width: 480px;
-  }
-
-  @media (max-width: 820px) {
-    .svc-copy-inner { padding: 1.75rem 1.5rem; max-width: 100%; }
-  }
-
-  .svc-number {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-    margin: 0;
-    opacity: 0.7;
-  }
-
-  .svc-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    color: var(--cream);
-    margin: 0;
-  }
-
-  .svc-tagline {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 400;
-    color: var(--accent);
-    margin: 0;
-    line-height: 1.5;
-    opacity: 0.85;
-  }
-
-  .svc-body {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 300;
-    line-height: 1.78;
-    color: rgba(250,248,245,0.42);
-    margin: 0;
-  }
-
-  /* Deliverables checklist */
-  .deliverables-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-  }
-
-  .deliverable-item {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 300;
-    color: rgba(250,248,245,0.52);
-    line-height: 1.4;
-  }
-
-  .deliverable-item svg {
-    color: var(--accent);
-    flex-shrink: 0;
-    opacity: 0.7;
-  }
-
-  /* Metrics */
-  .svc-metrics {
-    display: flex;
-    gap: 1.75rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid rgba(250,248,245,0.06);
-  }
-
-  .svc-metric { display: flex; flex-direction: column; gap: 0.12rem; }
-
-  .metric-val {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--cream);
-    line-height: 1;
-  }
-
-  .metric-lbl {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.62rem;
-    font-weight: 300;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(250,248,245,0.28);
-  }
-
-  /* CTA link */
-  .svc-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: rgba(250,248,245,0.35);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    width: fit-content;
-    transition: color 0.2s, gap 0.2s;
-  }
-
-  .svc-cta:focus-visible {
-    outline: 2px solid var(--blush);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-
-  /* ────────────────────────────────────────────────────────────
-     PROCESS SECTION
-  ──────────────────────────────────────────────────────────── */
-  .process-section {
-    position: relative;
-    background: var(--ink);
-    padding: 7rem 0;
-    overflow: hidden;
-  }
-
-  .process-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 50% 60% at 0% 50%, rgba(163,195,200,0.05) 0%, transparent 65%);
-    pointer-events: none;
-  }
-
-  .process-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: end;
-    margin-bottom: 4rem;
-  }
-
-  @media (max-width: 720px) {
-    .process-header { grid-template-columns: 1fr; gap: 1rem; }
-    .process-sub    { display: none; }
-  }
-
-  .process-heading {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--cream);
-    margin: 0;
-  }
-
-  .process-heading em {
-    font-style: italic;
-    background: linear-gradient(120deg, var(--scarlet), var(--blush));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .process-sub {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.92rem;
-    font-weight: 300;
-    line-height: 1.75;
-    color: rgba(250,248,245,0.38);
-    margin: 0;
-    max-width: 40ch;
-    align-self: flex-end;
-  }
-
-  /* Steps */
-  .process-steps {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .process-step {
-    display: grid;
-    grid-template-columns: 56px 36px 1fr;
-    gap: 0 1.5rem;
-    align-items: start;
-    animation: revealUp 0.5s cubic-bezier(0.16,1,0.3,1) both;
-  }
-
-  @media (max-width: 500px) {
-    .process-step { grid-template-columns: 44px 28px 1fr; gap: 0 1rem; }
-  }
-
-  .step-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--scarlet);
-    text-align: right;
-    padding-top: 0.2rem;
-  }
-
-  .step-connector {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .connector-dot {
-    width: 9px; height: 9px;
-    border-radius: 50%;
-    border: 1.5px solid var(--scarlet);
-    background: var(--ink);
-    box-shadow: 0 0 7px rgba(219,39,64,0.4);
-    flex-shrink: 0;
-    margin-top: 0.3rem;
-    z-index: 1;
-  }
-
-  .connector-line {
-    flex: 1;
-    width: 1px;
-    background: rgba(250,248,245,0.07);
-    min-height: 3rem;
-    margin-top: 5px;
-  }
-
-  .process-step:last-child .connector-line { display: none; }
-
-  .step-body { padding-bottom: 2.5rem; }
-
-  .step-title {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--cream);
-    margin: 0 0 0.45rem;
-    padding-top: 0.06rem;
-  }
-
-  .step-desc {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.87rem;
-    font-weight: 300;
-    line-height: 1.75;
-    color: rgba(250,248,245,0.4);
-    margin: 0;
-    max-width: 52ch;
-  }
-
-  /* ────────────────────────────────────────────────────────────
-     CLOSING CTA
-  ──────────────────────────────────────────────────────────── */
-  .cta-section {
-    position: relative;
-    background: var(--ink-2);
-    padding: 7rem 0;
-    text-align: center;
-    overflow: hidden;
-  }
-
-  .cta-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 55% 65% at 50% 50%, rgba(219,39,64,0.07) 0%, transparent 65%);
-    pointer-events: none;
-  }
-
-  .cta-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 620px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
-
-  .cta-heading {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--cream);
-    margin: 0 0 1.2rem;
-  }
-
-  .cta-heading em {
-    font-style: italic;
-    background: linear-gradient(120deg, var(--scarlet), var(--blush));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .cta-body {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 300;
-    line-height: 1.75;
-    color: rgba(250,248,245,0.4);
-    margin: 0 0 2.5rem;
-  }
-
-  .cta-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: #fff;
-    background: var(--scarlet);
-    text-decoration: none;
-    padding: 0.85rem 1.7rem;
-    border-radius: 7px;
-    box-shadow: 0 4px 20px rgba(219,39,64,0.28);
-    letter-spacing: 0.02em;
-    transition: background 0.2s, transform 0.2s, gap 0.2s;
-  }
-
-  .btn-primary:hover {
-    background: var(--crimson);
-    transform: translateY(-2px);
-    gap: 0.75rem;
-  }
-
-  .btn-primary:focus-visible {
-    outline: 2px solid var(--blush);
-    outline-offset: 3px;
-    border-radius: 7px;
-  }
-
-  .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 400;
-    color: rgba(250,248,245,0.38);
-    text-decoration: none;
-    padding: 0.85rem 1.5rem;
-    border-radius: 7px;
-    border: 1px solid rgba(250,248,245,0.1);
-    transition: color 0.2s, border-color 0.2s;
-  }
-
-  .btn-ghost:hover {
-    color: var(--cream);
-    border-color: rgba(250,248,245,0.25);
-  }
-
-  .btn-ghost:focus-visible {
-    outline: 2px solid var(--blush);
-    outline-offset: 3px;
-    border-radius: 7px;
-  }
-
-  /* ── Animation ────────────────────────────────────────────── */
-  @keyframes revealUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-inner, .service-card, .process-step { animation: none; }
-    .svc-visual svg { transition: none; }
-  }
-`;
-
-// ─── Page component ───────────────────────────────────────────────────────────
-
 export default function Services() {
     return (
         <main className="services-page">
-            <style>{styles}</style>
-
-            {/* ── Hero ──────────────────────────────────────────────── */}
             <section className="services-hero" aria-labelledby="services-page-heading">
                 <div className="hero-inner">
                     <div>
@@ -1196,8 +478,6 @@ export default function Services() {
                             them — we'll tell you what actually makes sense for where you are.
                         </p>
                     </div>
-
-                    {/* Jump-link index */}
                     <nav className="hero-links" aria-label="Jump to service">
                         {SERVICES.map(({ id, number, title }) => (
                             <a key={id} href={`#${id}`} className="hero-link-item">
@@ -1215,10 +495,7 @@ export default function Services() {
                     </nav>
                 </div>
             </section>
-
             <div className="section-divider" role="separator" />
-
-            {/* ── Service cards ──────────────────────────────────────── */}
             <section className="services-list" aria-label="Our services">
                 <div className="services-list-inner" role="list">
                     {SERVICES.map((svc, i) => (
@@ -1226,10 +503,7 @@ export default function Services() {
                     ))}
                 </div>
             </section>
-
             <div className="section-divider" role="separator" />
-
-            {/* ── Process ────────────────────────────────────────────── */}
             <section className="process-section" aria-labelledby="process-heading">
                 <div className="inner">
                     <div className="process-header">
@@ -1245,7 +519,6 @@ export default function Services() {
                             framework that keeps strategy and execution tightly aligned.
                         </p>
                     </div>
-
                     <div className="process-steps" role="list" aria-label="Our process">
                         {PROCESS_STEPS.map((step, i) => (
                             <ProcessStep key={step.number} {...step} index={i} />
@@ -1253,10 +526,7 @@ export default function Services() {
                     </div>
                 </div>
             </section>
-
             <div className="section-divider" role="separator" />
-
-            {/* ── CTA ────────────────────────────────────────────────── */}
             <section className="cta-section" aria-labelledby="services-cta-heading">
                 <div className="cta-inner">
                     <Eyebrow>Let's talk</Eyebrow>

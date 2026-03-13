@@ -21,25 +21,39 @@ A modern, production-grade digital marketing agency website built with **React 1
 
 ```
 src/
-├── components/
-│   ├── layout/
-│   │   ├── Navbar.jsx          # Fixed nav with scroll-aware backdrop + mobile drawer
-│   │   └── Footer.jsx          # Four-column footer with marquee-compatible layout
-│   │
-│   └── sections/               # Homepage sections (assembled in App.jsx)
-│       ├── Hero.jsx             # Full-bleed hero with animated visual
-│       ├── Brands.jsx           # Infinite CSS marquee trust bar
-│       ├── About.jsx            # Split-grid about section
-│       ├── Services.jsx         # Six-service unified grid
-│       ├── Projects.jsx         # Three featured case study cards
-│       ├── Testimonials.jsx     # Auto-advancing windowed carousel
-│       └── CTA.jsx              # Orbital-background closing CTA
+├── /
+│   layout/
+│   ├── Navbar.jsx          # Fixed nav with scroll-aware backdrop + mobile drawer
+│   └── Footer.jsx          # Four-column footer with marquee-compatible layout
+│   components/               # Homepage sections (assembled in App.jsx)
+│   ├── HeroSection.jsx             # Full-bleed hero with animated visual
+│   ├── BrandsSection.jsx           # Infinite CSS marquee trust bar
+│   ├── AboutSection.jsx            # Split-grid about section
+│   ├── ServicesSection.jsx         # Six-service unified grid
+│   ├── ProjectsSection.jsx         # Three featured case study cards
+│   ├── TestimonialsSection.jsx     # Auto-advancing windowed carousel
+│   └── CTASection.jsx              # Orbital-background closing CTA
 │
 ├── pages/
-│   ├── AboutPage.jsx            # Full about page: hero, timeline, values, team
-│   ├── ProjectsPage.jsx         # Filterable case studies: featured + grid layouts
-│   ├── ServicesPage.jsx         # Six services with split cards, process section
+│   ├── About.jsx            # Full about page: hero, timeline, values, team
+│   ├── Home.jsx            # Full Home Page:navbar,HeroSection,BrandsSection,ServicesSectionAboutSection,ProjectsSection,TestimonialsSection,CTASection,Footer
+│   ├── Projects.jsx         # Filterable case studies: featured + grid layouts
+│   ├── Services.jsx         # Six services with split cards, process section
 │   └── Contact.jsx              # Two-column contact form with validation
+|   Styles/
+│   ├── Navbar.css          
+│   └── Footer.css            
+│   ├── HeroSection.css             
+│   ├── BrandsSection.css           
+│   ├── AboutSection.css           
+│   ├── ServicesSection.css         
+│   ├── ProjectsSection.css         
+│   ├── TestimonialsSection.css     
+│   └── CTASection.css 
+│   ├── About.css            
+│   ├── Projects.css         
+│   ├── Services.css       
+│   └── Contact.css
 │
 └── main.jsx                     # App entry, router setup
 ```
@@ -112,25 +126,6 @@ All design tokens are defined as CSS custom properties on `:root` inside each co
 |---|---|---|
 | Display / Headings | Playfair Display | 700, 900, italic |
 | Body / UI | DM Sans | 300, 400, 500 |
-
-### Styling Convention
-
-Every component owns its styles via a `const styles = \`...\`` template literal injected with `<style>{styles}</style>`. This keeps each component fully self-contained with zero stylesheet dependencies:
-
-```jsx
-const styles = `
-  .my-component { color: var(--cream); }
-`;
-
-export default function MyComponent() {
-  return (
-    <>
-      <style>{styles}</style>
-      <div className="my-component">...</div>
-    </>
-  );
-}
-```
 
 ---
 

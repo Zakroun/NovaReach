@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
-
-// ─── Constants ────────────────────────────────────────────────────────────────
-
+import "../styles/ServicesSection.css";
 const SERVICES = [
     {
         id: "seo",
@@ -80,9 +78,6 @@ const SERVICES = [
         ),
     },
 ];
-
-// ─── Sub-components ───────────────────────────────────────────────────────────
-
 function ServiceCard({ id, title, desc, metric, icon, index }) {
     return (
         <article
@@ -93,14 +88,12 @@ function ServiceCard({ id, title, desc, metric, icon, index }) {
             <div className="card-icon-wrap" aria-hidden="true">
                 {icon}
             </div>
-
             <div className="card-body">
                 <h3 className="card-title" id={`service-${id}`}>
                     {title}
                 </h3>
                 <p className="card-desc">{desc}</p>
             </div>
-
             <footer className="card-footer">
                 <span className="card-metric">{metric}</span>
                 <Link
@@ -114,322 +107,13 @@ function ServiceCard({ id, title, desc, metric, icon, index }) {
                     </svg>
                 </Link>
             </footer>
-
             <span className="card-glow" aria-hidden="true" />
         </article>
     );
 }
-
-// ─── Styles ───────────────────────────────────────────────────────────────────
-
-const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500&display=swap');
-
-  :root {
-    --crimson:    #9C0D1C;
-    --scarlet:    #DB2740;
-    --blush:      #E35E7D;
-    --mauve:      #D7869E;
-    --slate-teal: #A3C3C8;
-    --ink:        #0e0d0d;
-    --ink-2:      #141313;
-    --cream:      #faf8f5;
-  }
-
-  /* ── Section ─────────────────────────────────────────────── */
-
-  .services-section {
-    position: relative;
-    background: var(--ink-2);
-    padding: 7rem 0;
-    overflow: hidden;
-    isolation: isolate;
-  }
-
-  .services-section::before {
-    content: '';
-    position: absolute;
-    top: -20%;
-    right: -15%;
-    width: 50%;
-    height: 80%;
-    background: radial-gradient(ellipse, rgba(219,39,64,0.06) 0%, transparent 65%);
-    pointer-events: none;
-  }
-
-  /* ── Inner ────────────────────────────────────────────────── */
-
-  .services-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
-
-  /* ── Section header ───────────────────────────────────────── */
-
-  .services-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: end;
-    margin-bottom: 4rem;
-  }
-
-  @media (max-width: 720px) {
-    .services-header {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .header-right { display: none; }
-  }
-
-  .header-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--scarlet);
-    margin-bottom: 1rem;
-  }
-
-  .eyebrow-dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--scarlet);
-    flex-shrink: 0;
-  }
-
-  .services-heading {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--cream);
-    margin: 0;
-  }
-
-  .services-heading em {
-    font-style: italic;
-    background: linear-gradient(120deg, var(--scarlet) 0%, var(--blush) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .header-right {
-    padding-bottom: 0.25rem;
-  }
-
-  .services-subhead {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 300;
-    line-height: 1.75;
-    color: rgba(250,248,245,0.45);
-    max-width: 38ch;
-    margin: 0 0 1.5rem;
-  }
-
-  .services-all-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--slate-teal);
-    text-decoration: none;
-    letter-spacing: 0.03em;
-    transition: color 0.2s, gap 0.2s;
-  }
-
-  .services-all-link:hover {
-    color: var(--cream);
-    gap: 0.7rem;
-  }
-
-  .services-all-link:focus-visible {
-    outline: 2px solid var(--blush);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-
-  /* ── Grid ─────────────────────────────────────────────────── */
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5px;
-    background: rgba(250,248,245,0.06);
-    border: 1px solid rgba(250,248,245,0.06);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-
-  @media (max-width: 860px) {
-    .services-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media (max-width: 540px) {
-    .services-grid { grid-template-columns: 1fr; }
-  }
-
-  /* ── Card ─────────────────────────────────────────────────── */
-
-  .service-card {
-    position: relative;
-    background: var(--ink-2);
-    padding: 2.2rem 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    overflow: hidden;
-    transition: background 0.25s ease;
-    animation: cardReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-
-  .service-card:hover {
-    background: #1a1818;
-  }
-
-  .service-card:hover .card-glow {
-    opacity: 1;
-  }
-
-  .service-card:hover .card-icon-wrap {
-    border-color: rgba(219,39,64,0.4);
-    color: var(--blush);
-    background: rgba(219,39,64,0.08);
-  }
-
-  .service-card:hover .card-link {
-    color: var(--blush);
-    gap: 0.6rem;
-  }
-
-  @keyframes cardReveal {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── Card glow ────────────────────────────────────────────── */
-
-  .card-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--scarlet), var(--blush));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-
-  /* ── Icon ─────────────────────────────────────────────────── */
-
-  .card-icon-wrap {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    border: 1px solid rgba(250,248,245,0.1);
-    color: rgba(250,248,245,0.5);
-    background: rgba(250,248,245,0.03);
-    transition: border-color 0.25s, color 0.25s, background 0.25s;
-    flex-shrink: 0;
-  }
-
-  .card-icon-wrap svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  /* ── Body ─────────────────────────────────────────────────── */
-
-  .card-body {
-    flex: 1;
-  }
-
-  .card-title {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--cream);
-    margin: 0 0 0.5rem;
-    line-height: 1.2;
-  }
-
-  .card-desc {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 300;
-    line-height: 1.7;
-    color: rgba(250,248,245,0.42);
-    margin: 0;
-  }
-
-  /* ── Footer ───────────────────────────────────────────────── */
-
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(250,248,245,0.06);
-    margin-top: auto;
-  }
-
-  .card-metric {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    color: var(--slate-teal);
-  }
-
-  .card-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: rgba(250,248,245,0.3);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: color 0.2s, gap 0.2s;
-  }
-
-  .card-link:focus-visible {
-    outline: 2px solid var(--blush);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-
-  /* ── Reduced motion ───────────────────────────────────────── */
-
-  @media (prefers-reduced-motion: reduce) {
-    .service-card { animation: none; }
-  }
-`;
-
-// ─── Component ────────────────────────────────────────────────────────────────
-
 export default function ServicesSection() {
     return (
         <section className="services-section" aria-labelledby="services-heading">
-            <style>{styles}</style>
-
             <div className="services-inner">
                 <header className="services-header">
                     <div className="header-left">
@@ -441,7 +125,6 @@ export default function ServicesSection() {
                             Marketing that <em>moves</em><br />the needle
                         </h2>
                     </div>
-
                     <div className="header-right">
                         <p className="services-subhead">
                             We combine creativity and data-driven strategy to deliver
@@ -455,7 +138,6 @@ export default function ServicesSection() {
                         </Link>
                     </div>
                 </header>
-
                 <div
                     className="services-grid"
                     role="list"
