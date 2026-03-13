@@ -180,41 +180,6 @@
     transform: translateX(3px);
 }
 
-/* ── Stats ───────────────────────────────────────────────── */
-
-.hero-stats {
-    display: flex;
-    gap: 2rem;
-    margin-top: 3rem;
-    list-style: none;
-    padding: 0;
-    border-top: 1px solid rgba(250, 248, 245, 0.08);
-    padding-top: 2rem;
-}
-
-.stat-pill {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-}
-
-.stat-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--cream);
-    line-height: 1;
-}
-
-.stat-label {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    color: rgba(250, 248, 245, 0.4);
-    text-transform: uppercase;
-}
-
 /* ── Hero Visual ──────────────────────────────────────────── */
 
 .hero-visual {

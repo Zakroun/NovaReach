@@ -91,11 +91,11 @@ export default function HeroSection() {
                             Our Services
                         </Link>
                     </nav>
-                    <ul className="hero-stats" role="list" aria-label="Agency metrics">
+                    {/* <ul className="hero-stats" role="list" aria-label="Agency metrics">
                         {STATS.map((stat) => (
                             <StatPill key={stat.label} {...stat} />
                         ))}
-                    </ul>
+                    </ul> */}
                 </div>
                 <HeroVisual />
             </div>
