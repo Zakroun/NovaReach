@@ -1,0 +1,518 @@
+import { Link } from "react-router-dom";
+
+// ─── Constants ────────────────────────────────────────────────────────────────
+
+const HEADLINE_WORDS = ["Grow", "Your", "Business"];
+const HEADLINE_ACCENT = "With Smart Digital Marketing";
+
+const STATS = [
+    { value: "340%", label: "Avg. ROI Increase" },
+    { value: "12M+", label: "Leads Generated" },
+    { value: "98%", label: "Client Retention" },
+];
+
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+function StatPill({ value, label }) {
+    return (
+        <div className="stat-pill" role="listitem">
+            <span className="stat-value">{value}</span>
+            <span className="stat-label">{label}</span>
+        </div>
+    );
+}
+
+function HeroVisual() {
+    return (
+        <figure className="hero-visual" aria-hidden="true">
+            <div className="visual-grid">
+                {[...Array(9)].map((_, i) => (
+                    <div
+                        key={i}
+                        className="grid-cell"
+                        style={{ animationDelay: `${i * 0.08}s` }}
+                    />
+                ))}
+            </div>
+
+            <div className="visual-card card-top">
+                <span className="card-dot" />
+                <span className="card-text">SEO Performance</span>
+                <span className="card-badge">↑ 214%</span>
+            </div>
+
+            <div className="visual-orb orb-primary" />
+            <div className="visual-orb orb-secondary" />
+
+            <div className="visual-card card-bottom">
+                <span className="card-dot dot-accent" />
+                <span className="card-text">New Leads Today</span>
+                <span className="card-badge badge-dark">+1,284</span>
+            </div>
+
+            <div className="visual-ring" />
+        </figure>
+    );
+}
+
+// ─── Styles ───────────────────────────────────────────────────────────────────
+
+const styles = `
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --crimson:     #9C0D1C;
+    --scarlet:     #DB2740;
+    --blush:       #E35E7D;
+    --mauve:       #D7869E;
+    --slate-teal:  #A3C3C8;
+    --ink:         #0e0d0d;
+    --cream:       #faf8f5;
+  }
+
+  /* ── Section ─────────────────────────────────────────────── */
+
+  .hero-section {
+    position: relative;
+    overflow: hidden;
+    background: var(--ink);
+    padding: 7rem 0 6rem;
+    isolation: isolate;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 60%, rgba(156,13,28,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 10% 20%, rgba(163,195,200,0.08) 0%, transparent 60%);
+    z-index: 0;
+  }
+
+  .hero-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 128px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ── Layout ───────────────────────────────────────────────── */
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  /* ── Eyebrow ─────────────────────────────────────────────── */
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--slate-teal);
+    margin-bottom: 1.5rem;
+  }
+
+  .eyebrow-line {
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--scarlet);
+    flex-shrink: 0;
+  }
+
+  /* ── Headline ────────────────────────────────────────────── */
+
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    line-height: 1.05;
+    color: var(--cream);
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .headline-accent {
+    display: block;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(2rem, 3.8vw, 3.1rem);
+    background: linear-gradient(100deg, var(--scarlet) 0%, var(--blush) 60%, var(--mauve) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-top: 0.15em;
+  }
+
+  /* ── Body copy ────────────────────────────────────────────── */
+
+  .hero-body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(250, 248, 245, 0.6);
+    max-width: 42ch;
+    margin: 1.6rem 0 2.4rem;
+  }
+
+  /* ── CTA Buttons ─────────────────────────────────────────── */
+
+  .hero-cta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 0.85rem 1.75rem;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-primary {
+    background: var(--scarlet);
+    color: #fff;
+    box-shadow: 0 4px 24px rgba(219, 39, 64, 0.35);
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus-visible {
+    background: var(--crimson);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(156, 13, 28, 0.45);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(250, 248, 245, 0.2);
+  }
+
+  .btn-ghost:hover,
+  .btn-ghost:focus-visible {
+    border-color: var(--mauve);
+    color: var(--mauve);
+    transform: translateY(-2px);
+  }
+
+  .btn-arrow {
+    transition: transform 0.2s ease;
+  }
+
+  .btn-primary:hover .btn-arrow {
+    transform: translateX(3px);
+  }
+
+  /* ── Stats ───────────────────────────────────────────────── */
+
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem;
+    list-style: none;
+    padding: 0;
+    border-top: 1px solid rgba(250, 248, 245, 0.08);
+    padding-top: 2rem;
+  }
+
+  .stat-pill {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: rgba(250, 248, 245, 0.4);
+    text-transform: uppercase;
+  }
+
+  /* ── Hero Visual ──────────────────────────────────────────── */
+
+  .hero-visual {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .visual-grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 8px;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .grid-cell {
+    background: rgba(250, 248, 245, 0.03);
+    border-radius: 4px;
+    animation: cellPulse 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes cellPulse {
+    from { background: rgba(250, 248, 245, 0.02); }
+    to   { background: rgba(163, 195, 200, 0.07); }
+  }
+
+  .visual-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    pointer-events: none;
+  }
+
+  .orb-primary {
+    width: 55%;
+    height: 55%;
+    top: 15%;
+    left: 15%;
+    background: radial-gradient(circle, rgba(219,39,64,0.45) 0%, transparent 70%);
+    animation: orbDrift 7s ease-in-out infinite alternate;
+  }
+
+  .orb-secondary {
+    width: 40%;
+    height: 40%;
+    bottom: 10%;
+    right: 10%;
+    background: radial-gradient(circle, rgba(163,195,200,0.3) 0%, transparent 70%);
+    animation: orbDrift 9s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes orbDrift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(8px, -12px) scale(1.08); }
+  }
+
+  .visual-ring {
+    position: absolute;
+    inset: 12%;
+    border-radius: 50%;
+    border: 1px solid rgba(219, 39, 64, 0.15);
+    animation: ringRotate 20s linear infinite;
+  }
+
+  .visual-ring::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--scarlet);
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px var(--scarlet);
+  }
+
+  @keyframes ringRotate {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ── Floating Cards ───────────────────────────────────────── */
+
+  .visual-card {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(14, 13, 13, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(250, 248, 245, 0.08);
+    border-radius: 8px;
+    padding: 0.6rem 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    z-index: 2;
+    animation: cardFloat 4s ease-in-out infinite alternate;
+  }
+
+  .card-top {
+    top: 8%;
+    right: -6%;
+  }
+
+  .card-bottom {
+    bottom: 12%;
+    left: -6%;
+    animation-direction: alternate-reverse;
+  }
+
+  @keyframes cardFloat {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-8px); }
+  }
+
+  .card-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--scarlet);
+    flex-shrink: 0;
+    box-shadow: 0 0 6px var(--scarlet);
+  }
+
+  .dot-accent {
+    background: var(--slate-teal);
+    box-shadow: 0 0 6px var(--slate-teal);
+  }
+
+  .card-text {
+    color: rgba(250, 248, 245, 0.6);
+    font-weight: 300;
+  }
+
+  .card-badge {
+    margin-left: auto;
+    padding-left: 0.6rem;
+    color: var(--cream);
+    font-weight: 500;
+  }
+
+  .badge-dark {
+    color: var(--slate-teal);
+  }
+
+  /* ── Entrance animation ───────────────────────────────────── */
+
+  .hero-content {
+    animation: contentReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .hero-visual {
+    animation: contentReveal 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes contentReveal {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Focus styles ────────────────────────────────────────── */
+
+  .btn:focus-visible {
+    outline: 2px solid var(--blush);
+    outline-offset: 3px;
+  }
+`;
+
+// ─── Component ────────────────────────────────────────────────────────────────
+
+export default function HeroSection() {
+    return (
+        <section className="hero-section" aria-label="Hero">
+            <style>{styles}</style>
+            <div className="hero-noise" role="presentation" />
+
+            <div className="hero-inner">
+                {/* ── Left: Copy ─────────────────────────────────────── */}
+                <div className="hero-content">
+                    <p className="hero-eyebrow" aria-label="Section label">
+                        <span className="eyebrow-line" />
+                        NovaReach Digital — Growth Agency
+                    </p>
+
+                    <h1 className="hero-headline">
+                        {HEADLINE_WORDS.join(" ")}
+                        <span className="headline-accent">{HEADLINE_ACCENT}</span>
+                    </h1>
+
+                    <p className="hero-body">
+                        We help brands increase visibility, generate qualified leads, and
+                        scale sustainably through data-driven digital strategies built for
+                        the modern web.
+                    </p>
+
+                    <nav className="hero-cta" aria-label="Primary actions">
+                        <Link to="/contact" className="btn btn-primary">
+                            Get Started
+                            <svg
+                                className="btn-arrow"
+                                width="14"
+                                height="14"
+                                viewBox="0 0 14 14"
+                                fill="none"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M2 7h10M8 3l4 4-4 4"
+                                    stroke="currentColor"
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
+                            </svg>
+                        </Link>
+
+                        <Link to="/services" className="btn btn-ghost">
+                            Our Services
+                        </Link>
+                    </nav>
+
+                    <ul className="hero-stats" role="list" aria-label="Agency metrics">
+                        {STATS.map((stat) => (
+                            <StatPill key={stat.label} {...stat} />
+                        ))}
+                    </ul>
+                </div>
+
+                {/* ── Right: Visual ───────────────────────────────────── */}
+                <HeroVisual />
+            </div>
+        </section>
+    );
+}
